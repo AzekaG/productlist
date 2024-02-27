@@ -1,0 +1,19 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.product-list {
+    max-width: 650px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.task-item button {
+    margin-left: auto;
+}
