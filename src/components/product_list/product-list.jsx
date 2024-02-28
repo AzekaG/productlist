@@ -40,7 +40,7 @@ const ProductList = () => {
                 <ProductFilter />
                 <div>
                     {
-                        products.map((task) => (<ProductItem {...task} key={task.id} />))
+                        products.map((task, index) => (<ProductItem {...task} key={task.id} />))
                     }
                 </div>
             </div>
