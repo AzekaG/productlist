@@ -7,7 +7,7 @@ const ModalWindow = ({ active, setActive, children }) => {
             <div className={active ? "modal__content active" : "modal__content"} onClick={e => e.stopPropagation()}>
                {children}
             </div>
-        </div>
+        </div > 
     );
 }
 
