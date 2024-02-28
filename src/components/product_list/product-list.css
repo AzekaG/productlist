@@ -1,19 +1,72 @@
 .container {
     width: 80%;
     margin: 0 auto;
+
+
 }
 
 .product-list {
-    max-width: 650px;
+    max-width: 250px;
+
 }
 
 .task-item {
     display: flex;
-    align-items: center;
+    align-items: right;
     gap: 10px;
-    margin: 5px 0;
+    position: relative
+        /*gap - отступ когда задаем дисплэй флекс , расстояние между елементами}*/
 }
 
 .task-item button {
-    margin-left: auto;
+
+    
+    right: 1px;
+
+
+}
+
+.task-done {
+    text-decoration: line-through;
+}
+
+
+.active {
+    background: salmon;
+    border-radius: 10px;
+}
+
+
+.modal {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal__content {
+    padding: 20px;
+    background: white;
+    height: 400px;
+    width: 400px;
+    transform: scale(0.5);
+    transition: 0.4s all;
+    width: 50vw;
+}
+
+.modal__content.active {
+    transform: scale(1);
 }
