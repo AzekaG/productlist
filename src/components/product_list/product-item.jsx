@@ -1,6 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import classNames from 'classname';
 
 const ProductItem = (task) => {
+
+    const [isEdit, setIsEdit] = useState(false);
+    const [newTitle, setNewTitle] = useState(task.title)
+    const normalTemplate = <span className={classNames({ 'task-done': task.done })} onClick={() => {
+        setIsEdit(true)
+    }}>{task.title}</span>
+
+    const saveTask = (e) => {
+        if (newTitle.trim().length === 0) {
+            setIsEdit(false);
+            setNewTitle(task.title);
+            return;
+        }
+        if (e.code === "Enter") {
+            setIsEdit(false);
+            task.updateProd(task.id, newTitle);
+        }
+    }
+    const editTemplate = <input onKeyDown={saveTask} value={newTitle} onChange={(e) => {
+        setNewTitle(e.target.value);
+    }} />
+
+
+
     const setModalWindow = (task) => {
 
         task.setModalActive(true)
@@ -26,12 +51,8 @@ const ProductItem = (task) => {
 
 
         <div className="task-item">
-            {/* <span>category: {task.category}</span>
-            <span>{task.title}</span>
-            <span>price: {task.price}</span>
-            <img src={task.image} style={{ width: '100px' }} /> */}
-            <input type='checkbox' defaultChecked={task.done} />
-            <span>{task.title}</span>
+            <input type='checkbox' defaultChecked={task.done} onClick={() => task.toggleDone(task.id)} />
+            {isEdit ? editTemplate : normalTemplate}
             <button onClick={() => task.removeProd(task.id)}>delete</button>
             <button onClick={() => setModalWindow(task)}>description</button>
         </div>

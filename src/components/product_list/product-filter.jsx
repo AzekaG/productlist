@@ -1,11 +1,23 @@
+import classNames from 'classnames';
 import React from 'react';
 
-const ProductFilter = () => {
+const ProductFilter = ({ setFilterProds, filterMap, activeFilter }) => {
+    const filterKeys = Object.keys(filterMap);
+
+
     return (
         <div>
-            <button>ToDo</button>
-            <button>Add</button>
-            <button>All</button>
+            {
+                filterKeys.map(filter =>
+                    <button
+
+                        onClick={(e) => { setFilterProds(filter); }}
+                        className={classNames({ bubbly_button: filter === activeFilter }, 'animate')}
+                        key={filter}
+                    >{filter}</button>
+                )}
+
+
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import "./product-list.css"
 import ProductAdd from './product-add';
 import ProductFilter from './product-filter';
@@ -6,15 +6,32 @@ import ProductItem from './product-item';
 import products from './productsStartData';
 import { nanoid } from 'nanoid';
 import ModalWindow from './modalWindow';
+import { ProductReducer } from './product-reducer';
 
 
 
 const ProductList = () => {
 
+    const [prods2, dispatch] = useReducer(ProductReducer, []);
+    console.log(prods2);
+
     let someVar = "ProductList";
+    const filterMap = {
+        "All": () => true,
+        "Done": (task) => task.done,
+        "To Do": (task) => !task.done,
+    }
 
 
-    const [prod, setProds] = useState(products); //функции по изменению состояния должны прописываться там, где есть состояние
+    const [prod, setProds] = useState([]); //функции по изменению состояния должны прописываться там, где есть состояние
+    useEffect(() => {
+        setProds(JSON.parse(localStorage.getItem("products")) || products);
+        dispatch({
+            type: 'create'
+        });
+    }, []);
+    const [filter, setFilterProds] = useState('All');
+
 
     const addProd = (title) => {
         setProds([...prod, {
@@ -24,8 +41,34 @@ const ProductList = () => {
         }]);
     }
 
+
+    useEffect(() => {
+        localStorage.setItem("products", JSON.stringify(prod))
+    }, [prod])
+
+
     const removeProd = (id) => {
-        setProds(products.filter(product => product.id !== id));
+        setProds(prod.filter(product => product.id !== id));
+    }
+
+    const toggleDone = (id) => {
+        const newProds = prod.map((task) => {
+            if (task.id === id) {
+                return { ...task, done: !task.done };
+            }
+            return task;
+        })
+        setProds(newProds);
+    }
+
+    const updateProd = (id, title) => {
+        const newProds = prod.map((task) => {
+            if (task.id === id) {
+                return { ...task, title };
+            }
+            return task;
+        })
+        setProds(newProds);
     }
 
 
@@ -36,17 +79,15 @@ const ProductList = () => {
 
 
         <div className='container'>
-            <button className='open-btn' onClick={() => setModalActive(true)}>Open Modal Window</button>
-
 
             <h1 style={{ color: 'dodgerblue' }}>{someVar}</h1>
             <div className='product-list'>
                 <ProductAdd addProd={addProd} />
-                <ProductFilter />
+                <ProductFilter setFilterProds={setFilterProds} filterMap={filterMap} activeFilter={filter} />
                 <div>
                     {
-                        prod.map((task, index) => (
-                            <><ProductItem {...task} key={task.id} removeProd={removeProd} setModalChildren={setModalChildren} setModalActive={setModalActive} /><hr /></>))
+                        prod.filter(filterMap[filter]).map((task) => (
+                            <><ProductItem {...task} key={task.id} removeProd={removeProd} setModalChildren={setModalChildren} setModalActive={setModalActive} toggleDone={toggleDone} updateProd={updateProd} /><hr key={nanoid()} /></>))
                     }
 
                 </div>
