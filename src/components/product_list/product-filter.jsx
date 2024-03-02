@@ -10,7 +10,6 @@ const ProductFilter = ({ setFilterProds, filterMap, activeFilter }) => {
             {
                 filterKeys.map(filter =>
                     <button
-
                         onClick={(e) => { setFilterProds(filter); }}
                         className={classNames({ bubbly_button: filter === activeFilter }, 'animate')}
                         key={filter}
