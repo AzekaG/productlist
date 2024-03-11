@@ -122,7 +122,10 @@ const ProductList = () => {
                 <div>
                     <ProductsSort setSort={setSort} />
                     {
-                        prod.sort((a, b) => sort === "cheap" ? a.price - b.price : sort === "expencive" ? b.price - a.price : sort === "nameUp" && a.title > b.title ? 1 : sort === "nameDown" && b.title > a.title ? 1 : 0)
+                        prod.sort((a, b) =>
+                            sort === "cheap" ? a.price - b.price :
+                                sort === "expencive" ? b.price - a.price :
+                                    (sort === "nameUp" && a.title > b.title ? 1 : -1))
                             .filter(filterMap[filter]).map((task) => (
                                 <><ProductItem {...task} key={task.id} removeProd={removeProd} setModalChildren={setModalChildren} setModalActive={setModalActive} toggleDone={toggleDone} updateProd={updateProd} /><hr key={nanoid()} /></>))
                     }

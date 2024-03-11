@@ -10,9 +10,10 @@ const sortParametrs = ["Sort by Name", "Sort by Price"];
 
 
 const ProductsSort = ({ setSort }) => {
+
     return (
         <div>
-            <select onChange={(e) => setSort(e.target.value)} className='category__select' name="" id="">
+            <select onChange={(e) => { setSort(e.target.value); console.log(e.target.value); }} className='category__select' name="" id="">
                 <option value="" hidden />
                 <option value="cheap">Сначала дешевле</option>
                 <option value="expencive">Сначала дороже</option>
