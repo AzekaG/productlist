@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import classNames from 'classname';
+import Favorite from '../favorite';
+import { FavoriteContext } from '../context/FavoriteContext';
 
 const ProductItem = (task) => {
 
     const [isEdit, setIsEdit] = useState(false);
     const [newTitle, setNewTitle] = useState(task.title)
+    const { toggleFavorite } = useContext(FavoriteContext);
+
+
+
+
     const normalTemplate = <span className={classNames({ 'task-done': task.done })} onClick={() => {
         setIsEdit(true)
-    }}>{task.title}</span>
+    }}>{task.title}</span>;
+
+
+
+
+
 
     const saveTask = (e) => {
         if (newTitle.trim().length === 0) {
@@ -31,7 +43,6 @@ const ProductItem = (task) => {
         task.setModalActive(true)
         task.setModalChildren(
             <>
-
                 <span>Name : {task.title}</span><br />
                 <span>Cost : {task.price}</span><br />
                 <span>Description : {task.description}</span><br />
@@ -45,14 +56,12 @@ const ProductItem = (task) => {
 
 
     return (
+        // className = { classNames({ bubbly_button: filter === activeFilter }, 'animate')}
 
-
-
-
-
-        <div className="task-item">
+        <div >
             <input type='checkbox' defaultChecked={task.done} onClick={() => task.toggleDone(task.id)} />
             {isEdit ? editTemplate : normalTemplate}
+            <div onClick={()=>toggleFavorite(task)}><Favorite /></div>
             <button onClick={() => task.removeProd(task.id)}>delete</button>
             <button onClick={() => setModalWindow(task)}>description</button>
         </div>

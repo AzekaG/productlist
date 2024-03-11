@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useContext } from 'react';
+import { FavoriteContext } from '../context/FavoriteContext';
 
 const ProductFilter = ({ setFilterProds, filterMap, activeFilter }) => {
-    const filterKeys = Object.keys(filterMap);
 
+    const filterKeys = Object.keys(filterMap);
 
     return (
         <div>
@@ -15,6 +16,7 @@ const ProductFilter = ({ setFilterProds, filterMap, activeFilter }) => {
                         key={filter}
                     >{filter}</button>
                 )}
+
 
 
         </div>

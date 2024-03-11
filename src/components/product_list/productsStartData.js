@@ -1,5 +1,4 @@
 
-
 const list = [{
     id: 1,
     title: 'banana',

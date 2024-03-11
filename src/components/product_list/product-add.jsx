@@ -21,7 +21,7 @@ const ProductAdd = ({ addProd }) => {
 
 
     return (
-        <div>
+        <div className='prodAdd'>
             <input type='text'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}

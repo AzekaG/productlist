@@ -1,26 +1,32 @@
 .container {
     width: 80%;
     margin: 0 auto;
-
+    z-index: 100;
+    align-items: center;
 
 }
 
 .product-list {
+
     max-width: 250px;
 
+    opacity: 0.99;
 }
 
+
 .task-item {
+    z-index: 100;
     display: flex;
     align-items: right;
     gap: 10px;
-    position: relative
-        /*gap - отступ когда задаем дисплэй флекс , расстояние между елементами}*/
+    position: relative;
+   
+    /*gap - отступ когда задаем дисплэй флекс , расстояние между елементами}*/
 }
 
 .task-item button {
 
-
+    z-index: 100;
     right: 1px;
 
 
@@ -121,6 +127,7 @@
 }
 
 .bubbly_button:after {
+
     display: none;
     bottom: -75%;
     background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
