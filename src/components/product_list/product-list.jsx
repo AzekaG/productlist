@@ -108,6 +108,13 @@ const ProductList = () => {
         })
 
     }
+    const sortFunction = {
+        cheap: (a, b) => a.price - b.price,
+        expencive: (a, b) => b.price - a.price,
+        nameUp: (a, b) => a.title > b.title ? 1 : -1,
+        nameDown: (a, b) => a.title > b.title ? -1 : 1,
+
+    }
 
 
 
@@ -122,10 +129,7 @@ const ProductList = () => {
                 <div>
                     <ProductsSort setSort={setSort} />
                     {
-                        prod.sort((a, b) =>
-                            sort === "cheap" ? a.price - b.price :
-                                sort === "expencive" ? b.price - a.price :
-                                    (sort === "nameUp" && a.title > b.title ? 1 : -1))
+                        prod.sort(sortFunction[sort])
                             .filter(filterMap[filter]).map((task) => (
                                 <><ProductItem {...task} key={task.id} removeProd={removeProd} setModalChildren={setModalChildren} setModalActive={setModalActive} toggleDone={toggleDone} updateProd={updateProd} /><hr key={nanoid()} /></>))
                     }
