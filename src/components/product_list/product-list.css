@@ -9,7 +9,7 @@
 .product-list {
 
     max-width: 250px;
-
+    z-index: 100;
     opacity: 0.99;
 }
 
@@ -20,7 +20,7 @@
     align-items: right;
     gap: 10px;
     position: relative;
-   
+
     /*gap - отступ когда задаем дисплэй флекс , расстояние между елементами}*/
 }
 
@@ -34,6 +34,7 @@
 
 .task-done {
     text-decoration: line-through;
+    z-index: 100;
 }
 
 
@@ -56,6 +57,7 @@
     opacity: 0;
     pointer-events: none;
     transition: 0.3s;
+    z-index: 100;
 }
 
 .modal.active {
@@ -77,7 +79,10 @@
     transform: scale(1);
 }
 
-
+nav {
+    display: flex;
+    gap: 1.5em;
+}
 
 
 
